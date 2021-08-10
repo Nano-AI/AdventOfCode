@@ -10,6 +10,7 @@ index_data = {
     '<': (-1, 0),
 }
 
+
 def part_1():
     houses = 0
     x, y = 0, 0
@@ -23,13 +24,28 @@ def part_1():
         y += dy
     return houses
 
+
 def part_2():
     houses = 0
-    santa_x, santa_y = 0, 0
-    robot_x, robot_y = 0, 0
+    visited = []
+    sx, sy = 0, 0
+    rx, ry = 0, 0
     for i, direction in enumerate(inp):
-        print(direction)
+        dx, dy = index_data[direction]
+        if i % 2 == 0:
+            sx += dx
+            sy += dy
+            if (sx, sy) not in visited:
+                houses += 1
+                visited.append((sx, sy))
+        elif i % 2 != 0:
+            rx += dx
+            ry += dy
+            if (rx, ry) not in visited:
+                houses += 1
+                visited.append((rx, ry))
     return houses
+
 
 print(part_1())
 print(part_2())
