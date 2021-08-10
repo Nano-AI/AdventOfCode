@@ -9,3 +9,15 @@
 <li><code>turn off 499,499 through 500,500</code> would turn off (or leave off) the middle four lights.</li>
 </ul>
 <p>After following the instructions, <em>how many lights are lit</em>?</p>
+
+<h2 id="part2">--- Part Two ---</h2><p>You just finish implementing your winning light pattern when you realize you mistranslated Santa's message from Ancient Nordic Elvish.</p>
+<p>The light grid you bought actually has individual brightness controls; each light can have a brightness of zero or more.  The lights all start at zero.</p>
+<p>The phrase <code>turn on</code> actually means that you should increase the brightness of those lights by <code>1</code>.</p>
+<p>The phrase <code>turn off</code> actually means that you should decrease the brightness of those lights by <code>1</code>, to a minimum of zero.</p>
+<p>The phrase <code>toggle</code> actually means that you should increase the brightness of those lights by <code>2</code>.</p>
+<p>What is the <em>total brightness</em> of all lights combined after following Santa's instructions?</p>
+<p>For example:</p>
+<ul>
+<li><code>turn on 0,0 through 0,0</code> would increase the total brightness by <code>1</code>.</li>
+<li><code>toggle 0,0 through 999,999</code> would increase the total brightness by <code>2000000</code>.</li>
+</ul>
