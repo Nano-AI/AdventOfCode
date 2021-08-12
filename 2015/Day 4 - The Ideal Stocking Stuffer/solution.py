@@ -2,6 +2,7 @@ import hashlib
 
 f = open('input.txt')
 inp = f.read()
+f.close()
 
 
 def part_1(zeroes=5) -> int:

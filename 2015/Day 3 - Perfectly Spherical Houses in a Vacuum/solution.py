@@ -2,6 +2,7 @@ from math import floor
 
 f = open('input.txt')
 inp = f.read()
+f.close()
 
 index_data = {
     '^': (0, 1),

@@ -1,7 +1,9 @@
 f = open("input.txt")
 inp = f.read()
+f.close()
 
 dim_s = inp.split('\n')
+
 
 def part_1():
     total = 0
@@ -15,6 +17,7 @@ def part_1():
 
     return total
 
+
 def part_2():
     total = 0
 
@@ -24,9 +27,9 @@ def part_2():
         ribbon = min(2*l + 2*w, 2*l + 2*h, 2*w + 2*h)
         bow = l * w * h
         total += ribbon + bow
-        
 
     return total
+
 
 print(part_1())
 print(part_2())
