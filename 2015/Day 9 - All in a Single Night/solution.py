@@ -7,14 +7,17 @@ f.close()
 
 m = dict()
 places = list()
-for p in inp:
-    (p1, _, p2, _, d) = p.split()
-    m[f'{p1} -> {p2}'] = d
-    m[f'{p2} -> {p1}'] = d
-    if p1 not in places:
-        places.append(p1)
-    if p2 not in places:
-        places.append(p2)
+
+
+def setup_places():
+    for p in inp:
+        (p1, _, p2, _, d) = p.split()
+        m[f'{p1} -> {p2}'] = d
+        m[f'{p2} -> {p1}'] = d
+        if p1 not in places:
+            places.append(p1)
+        if p2 not in places:
+            places.append(p2)
 
 
 def part_1():
@@ -39,5 +42,6 @@ def part_2():
     return longest
 
 
+setup_places()
 print(part_1())
 print(part_2())
