@@ -11,8 +11,7 @@ def part_1():
             s = 0 
         else:
             s += int(line)
-
-    print(m)
+    return m
 
 def part_2():
     sums = []
@@ -23,7 +22,7 @@ def part_2():
             s = 0 
         else:
             s += int(line)
-    print(sum(sorted(sums)[-3:]))
+    return sum(sorted(sums)[-3:])
 
-part_1()
-part_2()
+print("Part 1:", part_1())
+print("Part 2:", part_2())
