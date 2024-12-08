@@ -1,6 +1,6 @@
 import math
 
-f = open("./2024/Day 6 - Guard Gallivant/input.txt")
+f = open("input.txt")
 i = f.read()
 f.close()
 
@@ -48,53 +48,40 @@ for j in range(0, height):
 
 def part_1(m0, x0, y0, angle0):
     walked = 0
+    steps = 0
     while in_range(x0, 0, width) and in_range(y0, 0, height):
+        if steps > width * height:
+            return -1
         dx, dy = get_dir(angle0)
         x1, y1 = x0 + dx, y0 + dy
         if in_range(x1, 0, width) and in_range(y1, 0, height):
-            if m[y1][x1] == '#':
+            if m0[y1][x1] == '#':
                 angle0 -= 90
                 continue
-            if m[y0][x0] == '.':
+            if m0[y0][x0] == '.':
                 walked += 1
-                m[y0][x0] = 'X'
+                m0[y0][x0] = 'X'
+        steps += 1
         x0, y0 = x1, y1
-    walked += 1
+    walked += 2
     return walked
 
-def part_2(m0, x0, y0, angle0):
-    directions = [(0, 0) * width] * height
+def part_2(m0, x, y, angle0):
+    # this is actually some of the worst code i've ever written
+    x0, y0 = x, y
     xi, yi = x0, y0
     blocks = 0
     dx, dy = get_dir(angle0)
-    for i in range(0, height):
-        for j in range(0, width):
-            if m[j][i] == '#' or (i == yi and j == xi):
+    for j in range(0, height):
+        for i in range(0, width):
+            if m0[j][i] == '#' or (j == yi and i == xi):
                 continue
-
             m0[j][i] = '#'
-
-            while in_range(x0, 0, width) and in_range(y0, 0, height):
-                dx, dy = get_dir(angle0)
-                if m[y][x] == 'X' and (dx, dy) == directions[y][x]:
-                    blocks += 1
-                    break
-                x1, y1 = x0 + dx, y0 + dy
-                if in_range(x1, 0, width) and in_range(y1, 0, height):
-                    if m[y1][x1] == '#':
-                        angle0 -= 90
-                        continue
-                    if m[y0][x0] == '.':
-                        m[y0][x0] = 'X'
-                        directions[y0][x0] = (dx, dy)
-
-                x0, y0 = x1, y1
-
-                print("\n".join([ "".join(a) for a in m ]))
-
-            m[j][i] = '.'
+            if part_1(m0, x, y, angle0) < 0:
+                blocks += 1 
+            m0[j][i] = '.'
     
     return blocks
 
-print("Part 1: " + str(part_1(m, x, y, angle)))
-print("Part 2: " + str(part_2(m, x, y, angle)))
+print("Part 1: " + str(part_1([row[:] for row in m], x, y, angle)))
+print("Part 2: " + str(part_2([row[:] for row in m], x, y, angle)))
