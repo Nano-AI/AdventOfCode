@@ -13,10 +13,9 @@ vector<string> get_input(string filename) {
   return output;
 }
 
-ull get_max_index(string line) {
-  if (line.empty()) return -1;
-  ull max = 0;
-  for (ull i = 0; i < line.length(); i++) {
+int get_max_index(string line, int start, int end) {
+  int max = start;
+  for (ull i = start; i < end; i++) {
     if (line[i] > line[max]) max = i;
   }
   return max;
@@ -27,21 +26,13 @@ ull solve(vector<string> &input, int joltage_size) {
   for (string line : input) {
     ull joltage = 0;
     ull power = 0;
-    string current_line = line;
-
     int current_index = 0;
     for (int i = joltage_size - 1; i >= 0; i--)  {
-      // substring from last index to length - (i)
-      int start_index = current_index;
-      int end_index = line.length() - i;
-      string sub = line.substr(current_index, end_index - start_index);
-      // cout << sub << endl;
-      int max_index = get_max_index(sub);
+      current_index = get_max_index(line, current_index, line.length() - i);
       joltage *= 10;
-      joltage += sub[max_index] - '0';
-      current_index += max_index + 1;
+      joltage += line[current_index] - '0';
+      current_index++;
     } 
-    // cout << joltage << endl;
     output += joltage;
   }
   return output;
