@@ -28,6 +28,7 @@ in_t get_input(string filename) {
   return output;
 }
 
+// merge ranges by sorting
 in_t condense_input(in_t &input) {
   vector<range_t> &values = input.first;
   sort(values.begin(), values.end(), [](range_t& first, range_t& second) {
@@ -49,14 +50,25 @@ in_t condense_input(in_t &input) {
   return { p, input.second };
 }
 
+// use sorted ranges to binary search
 ull part_1(in_t input) {
   int count = 0;
 
   for (auto id : input.second) {
-    for (auto range : input.first) {
-      if (id >= range.first && id <= range.second) {
+    auto ranges = input.first;
+    // binary search
+    int high = ranges.size() - 1;
+    int low = 0;
+    while (high >= low) {
+      int between = (high - low) / 2 + low;
+      if (id >= ranges[between].first && id <= ranges[between].second) {
         count++;
         break;
+      }
+      if (ranges[between].first > id) {
+        high = between - 1;
+      } if (ranges[between].second < id) {
+        low = between + 1;
       }
     }
   }
